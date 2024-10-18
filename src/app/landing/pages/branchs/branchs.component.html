@@ -1,0 +1,22 @@
+<div class="col-6 mt-4 mx-auto ps-0 pe-0">
+  <h1 class="col-12 text-center mb-4">SUCURSALES</h1>
+    <div class="col-12 col-md-12 col-xs-12 col-sm-12 row mt-4 mb-4" *ngFor="let branch of branches">
+      <div class="col-6 col-md-6 col-xs-12 col-sm-12 row align-items-center mb-2">
+        <div class="col-6 col-md-12 col-xs-12 col-sm-6 justify-content align-items-center">
+          <h4>{{ branch.name }}</h4>
+          <p>{{ branch.street }} {{ branch.number }}</p>
+          <p>{{ branch.colony }}, {{ branch.county }}</p>
+        </div>
+        <div class="col-6 col-md-12 col-xs-12 col-sm-6 justify-content align-items-center h-100">
+          <ul>
+            <li *ngFor="let schedule of (getSchedules(branch) | orderBy)">
+              {{ schedule.days }}: {{ schedule.schedule }}
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-6 col-md-6 col-xs-12 col-sm-12">
+        <app-branch-map [lat]="branch.lat" [lng]="branch.lng" [title]="branch.name"></app-branch-map>
+      </div> 
+    </div>
+  </div>

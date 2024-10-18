@@ -1,14 +1,9 @@
 <div class="row pt-2 align-items-center header">
-    <div class="col-3">
-        <img class="logo-img" [src]="imagePath" alt="logo">
-    </div>
-    <div class="col-6 row">
-        <div class="col align-self-center">
-            <p class=" align-self-center ">chale</p>
-        </div>
-        <div class=" col-3">
-            <p-menu [model]="menu"></p-menu>
-        </div>
-        
+    <div class="col row ">
+        <p-menubar [model]="menu">
+            <ng-template pTemplate="start">
+                <img class="logo-img" [src]="imagePath" alt="logo">
+            </ng-template>
+        </p-menubar>
     </div>
 </div>

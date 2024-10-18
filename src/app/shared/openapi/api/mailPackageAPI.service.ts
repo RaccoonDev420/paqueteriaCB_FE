@@ -18,8 +18,11 @@ import { HttpClient, HttpHeaders, HttpParams,
 import { CustomHttpParameterCodec }                          from '../encoder';
 import { Observable }                                        from 'rxjs';
 
+import { GenericResponseListMailPackageDto } from '../model/models';
+import { GenericResponseMailPackageDto } from '../model/models';
+import { GenericResponsePageMailPackageDto } from '../model/models';
 import { GenericSearchCriteriaMailPackageDto } from '../model/models';
-import { MailPackageDto } from '../model/models';
+import { Pagination } from '../model/models';
 
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
 import { Configuration }                                     from '../configuration';
@@ -92,9 +95,9 @@ export class MailPackageAPIService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public advanceSearch(searchCriteria: GenericSearchCriteriaMailPackageDto, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<object>;
-    public advanceSearch(searchCriteria: GenericSearchCriteriaMailPackageDto, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<HttpResponse<object>>;
-    public advanceSearch(searchCriteria: GenericSearchCriteriaMailPackageDto, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<HttpEvent<object>>;
+    public advanceSearch(searchCriteria: GenericSearchCriteriaMailPackageDto, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<GenericResponsePageMailPackageDto>;
+    public advanceSearch(searchCriteria: GenericSearchCriteriaMailPackageDto, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<HttpResponse<GenericResponsePageMailPackageDto>>;
+    public advanceSearch(searchCriteria: GenericSearchCriteriaMailPackageDto, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<HttpEvent<GenericResponsePageMailPackageDto>>;
     public advanceSearch(searchCriteria: GenericSearchCriteriaMailPackageDto, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<any> {
         if (searchCriteria === null || searchCriteria === undefined) {
             throw new Error('Required parameter searchCriteria was null or undefined when calling advanceSearch.');
@@ -141,7 +144,7 @@ export class MailPackageAPIService {
             responseType_ = 'text';
         }
 
-        return this.httpClient.post<object>(`${this.configuration.basePath}/paqueteria-cb/api/package/search`,
+        return this.httpClient.post<GenericResponsePageMailPackageDto>(`${this.configuration.basePath}/paqueteria-cb/api/package/search`,
             searchCriteria,
             {
                 context: localVarHttpContext,
@@ -216,9 +219,9 @@ export class MailPackageAPIService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public findAll(observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<object>;
-    public findAll(observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<HttpResponse<object>>;
-    public findAll(observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<HttpEvent<object>>;
+    public findAll(observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<GenericResponseListMailPackageDto>;
+    public findAll(observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<HttpResponse<GenericResponseListMailPackageDto>>;
+    public findAll(observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<HttpEvent<GenericResponseListMailPackageDto>>;
     public findAll(observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<any> {
 
         let localVarHeaders = this.defaultHeaders;
@@ -253,7 +256,7 @@ export class MailPackageAPIService {
             responseType_ = 'text';
         }
 
-        return this.httpClient.get<object>(`${this.configuration.basePath}/paqueteria-cb/api/package`,
+        return this.httpClient.get<GenericResponseListMailPackageDto>(`${this.configuration.basePath}/paqueteria-cb/api/package`,
             {
                 context: localVarHttpContext,
                 responseType: <any>responseType_,
@@ -266,75 +269,17 @@ export class MailPackageAPIService {
     }
 
     /**
-     * findById
-     * @param id id
+     * findAllPaged
+     * @param pagination pagination
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public findById(id: number, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<object>;
-    public findById(id: number, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<HttpResponse<object>>;
-    public findById(id: number, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<HttpEvent<object>>;
-    public findById(id: number, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<any> {
-        if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling findById.');
-        }
-
-        let localVarHeaders = this.defaultHeaders;
-
-        let localVarCredential: string | undefined;
-        // authentication (JWT) required
-        localVarCredential = this.configuration.lookupCredential('JWT');
-        if (localVarCredential) {
-            localVarHeaders = localVarHeaders.set('Authorization', localVarCredential);
-        }
-
-        let localVarHttpHeaderAcceptSelected: string | undefined = options && options.httpHeaderAccept;
-        if (localVarHttpHeaderAcceptSelected === undefined) {
-            // to determine the Accept header
-            const httpHeaderAccepts: string[] = [
-                '*/*'
-            ];
-            localVarHttpHeaderAcceptSelected = this.configuration.selectHeaderAccept(httpHeaderAccepts);
-        }
-        if (localVarHttpHeaderAcceptSelected !== undefined) {
-            localVarHeaders = localVarHeaders.set('Accept', localVarHttpHeaderAcceptSelected);
-        }
-
-        let localVarHttpContext: HttpContext | undefined = options && options.context;
-        if (localVarHttpContext === undefined) {
-            localVarHttpContext = new HttpContext();
-        }
-
-
-        let responseType_: 'text' | 'json' = 'json';
-        if(localVarHttpHeaderAcceptSelected && localVarHttpHeaderAcceptSelected.startsWith('text')) {
-            responseType_ = 'text';
-        }
-
-        return this.httpClient.get<object>(`${this.configuration.basePath}/paqueteria-cb/api/package/${encodeURIComponent(String(id))}`,
-            {
-                context: localVarHttpContext,
-                responseType: <any>responseType_,
-                withCredentials: this.configuration.withCredentials,
-                headers: localVarHeaders,
-                observe: observe,
-                reportProgress: reportProgress
-            }
-        );
-    }
-
-    /**
-     * saveEntitie
-     * @param object object
-     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
-     * @param reportProgress flag to report request and response progress.
-     */
-    public saveEntitie(object: MailPackageDto, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<object>;
-    public saveEntitie(object: MailPackageDto, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<HttpResponse<object>>;
-    public saveEntitie(object: MailPackageDto, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<HttpEvent<object>>;
-    public saveEntitie(object: MailPackageDto, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<any> {
-        if (object === null || object === undefined) {
-            throw new Error('Required parameter object was null or undefined when calling saveEntitie.');
+    public findAllPaged(pagination: Pagination, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<GenericResponsePageMailPackageDto>;
+    public findAllPaged(pagination: Pagination, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<HttpResponse<GenericResponsePageMailPackageDto>>;
+    public findAllPaged(pagination: Pagination, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<HttpEvent<GenericResponsePageMailPackageDto>>;
+    public findAllPaged(pagination: Pagination, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<any> {
+        if (pagination === null || pagination === undefined) {
+            throw new Error('Required parameter pagination was null or undefined when calling findAllPaged.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -378,10 +323,226 @@ export class MailPackageAPIService {
             responseType_ = 'text';
         }
 
-        return this.httpClient.post<object>(`${this.configuration.basePath}/paqueteria-cb/api/package`,
-            object,
+        return this.httpClient.post<GenericResponsePageMailPackageDto>(`${this.configuration.basePath}/paqueteria-cb/api/package/paged`,
+            pagination,
             {
                 context: localVarHttpContext,
+                responseType: <any>responseType_,
+                withCredentials: this.configuration.withCredentials,
+                headers: localVarHeaders,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * findById
+     * @param id id
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public findById(id: number, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<GenericResponseMailPackageDto>;
+    public findById(id: number, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<HttpResponse<GenericResponseMailPackageDto>>;
+    public findById(id: number, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<HttpEvent<GenericResponseMailPackageDto>>;
+    public findById(id: number, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<any> {
+        if (id === null || id === undefined) {
+            throw new Error('Required parameter id was null or undefined when calling findById.');
+        }
+
+        let localVarHeaders = this.defaultHeaders;
+
+        let localVarCredential: string | undefined;
+        // authentication (JWT) required
+        localVarCredential = this.configuration.lookupCredential('JWT');
+        if (localVarCredential) {
+            localVarHeaders = localVarHeaders.set('Authorization', localVarCredential);
+        }
+
+        let localVarHttpHeaderAcceptSelected: string | undefined = options && options.httpHeaderAccept;
+        if (localVarHttpHeaderAcceptSelected === undefined) {
+            // to determine the Accept header
+            const httpHeaderAccepts: string[] = [
+                '*/*'
+            ];
+            localVarHttpHeaderAcceptSelected = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        }
+        if (localVarHttpHeaderAcceptSelected !== undefined) {
+            localVarHeaders = localVarHeaders.set('Accept', localVarHttpHeaderAcceptSelected);
+        }
+
+        let localVarHttpContext: HttpContext | undefined = options && options.context;
+        if (localVarHttpContext === undefined) {
+            localVarHttpContext = new HttpContext();
+        }
+
+
+        let responseType_: 'text' | 'json' = 'json';
+        if(localVarHttpHeaderAcceptSelected && localVarHttpHeaderAcceptSelected.startsWith('text')) {
+            responseType_ = 'text';
+        }
+
+        return this.httpClient.get<GenericResponseMailPackageDto>(`${this.configuration.basePath}/paqueteria-cb/api/package/${encodeURIComponent(String(id))}`,
+            {
+                context: localVarHttpContext,
+                responseType: <any>responseType_,
+                withCredentials: this.configuration.withCredentials,
+                headers: localVarHeaders,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * saveEntitie
+     * @param deliverBranchId 
+     * @param deliverBranchName 
+     * @param delivered 
+     * @param deliveryPrice 
+     * @param deliveryPriceId 
+     * @param from 
+     * @param id 
+     * @param initialBranchId 
+     * @param initialBranchName 
+     * @param packageStatus 
+     * @param packageStatusId 
+     * @param received 
+     * @param storagePrice 
+     * @param storagePriceId 
+     * @param to 
+     * @param totalPrice 
+     * @param transfer 
+     * @param transportationCompleted 
+     * @param transportationId 
+     * @param weeks 
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public saveEntitie(deliverBranchId?: number, deliverBranchName?: string, delivered?: string, deliveryPrice?: number, deliveryPriceId?: number, from?: string, id?: number, initialBranchId?: number, initialBranchName?: string, packageStatus?: string, packageStatusId?: number, received?: string, storagePrice?: number, storagePriceId?: number, to?: string, totalPrice?: number, transfer?: boolean, transportationCompleted?: boolean, transportationId?: number, weeks?: number, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<GenericResponseMailPackageDto>;
+    public saveEntitie(deliverBranchId?: number, deliverBranchName?: string, delivered?: string, deliveryPrice?: number, deliveryPriceId?: number, from?: string, id?: number, initialBranchId?: number, initialBranchName?: string, packageStatus?: string, packageStatusId?: number, received?: string, storagePrice?: number, storagePriceId?: number, to?: string, totalPrice?: number, transfer?: boolean, transportationCompleted?: boolean, transportationId?: number, weeks?: number, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<HttpResponse<GenericResponseMailPackageDto>>;
+    public saveEntitie(deliverBranchId?: number, deliverBranchName?: string, delivered?: string, deliveryPrice?: number, deliveryPriceId?: number, from?: string, id?: number, initialBranchId?: number, initialBranchName?: string, packageStatus?: string, packageStatusId?: number, received?: string, storagePrice?: number, storagePriceId?: number, to?: string, totalPrice?: number, transfer?: boolean, transportationCompleted?: boolean, transportationId?: number, weeks?: number, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<HttpEvent<GenericResponseMailPackageDto>>;
+    public saveEntitie(deliverBranchId?: number, deliverBranchName?: string, delivered?: string, deliveryPrice?: number, deliveryPriceId?: number, from?: string, id?: number, initialBranchId?: number, initialBranchName?: string, packageStatus?: string, packageStatusId?: number, received?: string, storagePrice?: number, storagePriceId?: number, to?: string, totalPrice?: number, transfer?: boolean, transportationCompleted?: boolean, transportationId?: number, weeks?: number, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<any> {
+
+        let localVarQueryParameters = new HttpParams({encoder: this.encoder});
+        if (deliverBranchId !== undefined && deliverBranchId !== null) {
+          localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
+            <any>deliverBranchId, 'deliverBranchId');
+        }
+        if (deliverBranchName !== undefined && deliverBranchName !== null) {
+          localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
+            <any>deliverBranchName, 'deliverBranchName');
+        }
+        if (delivered !== undefined && delivered !== null) {
+          localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
+            <any>delivered, 'delivered');
+        }
+        if (deliveryPrice !== undefined && deliveryPrice !== null) {
+          localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
+            <any>deliveryPrice, 'deliveryPrice');
+        }
+        if (deliveryPriceId !== undefined && deliveryPriceId !== null) {
+          localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
+            <any>deliveryPriceId, 'deliveryPriceId');
+        }
+        if (from !== undefined && from !== null) {
+          localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
+            <any>from, 'from');
+        }
+        if (id !== undefined && id !== null) {
+          localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
+            <any>id, 'id');
+        }
+        if (initialBranchId !== undefined && initialBranchId !== null) {
+          localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
+            <any>initialBranchId, 'initialBranchId');
+        }
+        if (initialBranchName !== undefined && initialBranchName !== null) {
+          localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
+            <any>initialBranchName, 'initialBranchName');
+        }
+        if (packageStatus !== undefined && packageStatus !== null) {
+          localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
+            <any>packageStatus, 'packageStatus');
+        }
+        if (packageStatusId !== undefined && packageStatusId !== null) {
+          localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
+            <any>packageStatusId, 'packageStatusId');
+        }
+        if (received !== undefined && received !== null) {
+          localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
+            <any>received, 'received');
+        }
+        if (storagePrice !== undefined && storagePrice !== null) {
+          localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
+            <any>storagePrice, 'storagePrice');
+        }
+        if (storagePriceId !== undefined && storagePriceId !== null) {
+          localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
+            <any>storagePriceId, 'storagePriceId');
+        }
+        if (to !== undefined && to !== null) {
+          localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
+            <any>to, 'to');
+        }
+        if (totalPrice !== undefined && totalPrice !== null) {
+          localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
+            <any>totalPrice, 'totalPrice');
+        }
+        if (transfer !== undefined && transfer !== null) {
+          localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
+            <any>transfer, 'transfer');
+        }
+        if (transportationCompleted !== undefined && transportationCompleted !== null) {
+          localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
+            <any>transportationCompleted, 'transportationCompleted');
+        }
+        if (transportationId !== undefined && transportationId !== null) {
+          localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
+            <any>transportationId, 'transportationId');
+        }
+        if (weeks !== undefined && weeks !== null) {
+          localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
+            <any>weeks, 'weeks');
+        }
+
+        let localVarHeaders = this.defaultHeaders;
+
+        let localVarCredential: string | undefined;
+        // authentication (JWT) required
+        localVarCredential = this.configuration.lookupCredential('JWT');
+        if (localVarCredential) {
+            localVarHeaders = localVarHeaders.set('Authorization', localVarCredential);
+        }
+
+        let localVarHttpHeaderAcceptSelected: string | undefined = options && options.httpHeaderAccept;
+        if (localVarHttpHeaderAcceptSelected === undefined) {
+            // to determine the Accept header
+            const httpHeaderAccepts: string[] = [
+                '*/*'
+            ];
+            localVarHttpHeaderAcceptSelected = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        }
+        if (localVarHttpHeaderAcceptSelected !== undefined) {
+            localVarHeaders = localVarHeaders.set('Accept', localVarHttpHeaderAcceptSelected);
+        }
+
+        let localVarHttpContext: HttpContext | undefined = options && options.context;
+        if (localVarHttpContext === undefined) {
+            localVarHttpContext = new HttpContext();
+        }
+
+
+        let responseType_: 'text' | 'json' = 'json';
+        if(localVarHttpHeaderAcceptSelected && localVarHttpHeaderAcceptSelected.startsWith('text')) {
+            responseType_ = 'text';
+        }
+
+        return this.httpClient.post<GenericResponseMailPackageDto>(`${this.configuration.basePath}/paqueteria-cb/api/package`,
+            null,
+            {
+                context: localVarHttpContext,
+                params: localVarQueryParameters,
                 responseType: <any>responseType_,
                 withCredentials: this.configuration.withCredentials,
                 headers: localVarHeaders,

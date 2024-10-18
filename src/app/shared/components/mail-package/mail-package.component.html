@@ -1,0 +1,15 @@
+<div class="container mt-5">
+    <div class="row">
+        <h5 class="card-title">Details</h5>
+        <p class="card-text"><strong>Folio:</strong> {{mailPackage.id}}</p>
+        <p class="card-text"><strong>De:</strong> {{mailPackage.from}}</p>
+        <p class="card-text"><strong>Para:</strong> {{mailPackage.to}}</p>
+        <p class="card-text"><strong>Translado:</strong> {{mailPackage.transfer}}</p>
+        <p class="card-text"><strong>Recivido:</strong> {{mailPackage.received | dateFormat}}</p>
+        <p class="card-text"><strong>Precio de almacenaje:</strong> ${{mailPackage.storagePrice}}</p>
+        <p class="card-text"><strong>Precio de translado:</strong> ${{mailPackage.deliveryPrice}}</p>
+        <p class="card-text"><strong>Sucursal de origen:</strong> {{mailPackage.initialBranchName}}</p>
+        <p class="card-text"><strong>Sucursal de destino:</strong> {{mailPackage.deliverBranchName}}</p>
+        <p class="card-text"><strong>Estatus del paquete:</strong> {{mailPackage.packageStatus}}</p>
+    </div>
+  </div>

@@ -9,6 +9,7 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
+import { BranchScheduleDto } from './branchScheduleDto';
 
 
 export interface BranchDto { 
@@ -16,8 +17,11 @@ export interface BranchDto {
     county?: string;
     createdAt?: string;
     id?: number;
+    lat?: number;
+    lng?: number;
     name?: string;
     number?: string;
+    schedules?: Set<BranchScheduleDto>;
     street?: string;
     updatedAt?: string;
 }

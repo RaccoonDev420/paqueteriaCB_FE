@@ -1,0 +1,62 @@
+.row{
+  padding-left: 0px;
+  padding-right: 0px;
+}
+
+:host {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+  
+  p-gmap {
+    width: 100%;
+    height: 100%;
+    background-color: white !important;
+  }
+
+  :host ::ng-deep .ui-gmap {
+    width: 100%;
+    height: 100%; /* Adjust the height as needed */
+    background-color: white; /* To ensure the map container is visible */
+    border: 2px solid #fff; /* White border to stand out against the black background */
+    border-radius: 10px; /* Optional: for rounded corners */
+  }
+  
+  :host ::ng-deep .ui-gmap canvas {
+    background-color: white; /* Black background */
+  }
+  
+  :host ::ng-deep .ui-gmap .gm-style-iw {
+    color: #fff; /* White text color inside info windows */
+  }
+  
+  :host ::ng-deep .ui-gmap .gm-style .gm-style-iw-t::after,
+  :host ::ng-deep .ui-gmap .gm-style .gm-style-iw-t::before {
+    border: 2px solid #fff; /* Info window border to match the map border */
+  }
+  
+  :host ::ng-deep .ui-gmap .gm-style .gm-style-mtc label {
+    color: #fff; /* White text color for labels */
+  }
+
+  @media (max-width: 768px) {
+    :host {
+      display: block;
+      width: 100%;
+      height: 300px;
+    }
+    p-gmap {
+      width: 100%;
+      height: 300px;
+      background-color: white !important;
+    }
+  
+    :host ::ng-deep .ui-gmap {
+      width: 100%;
+      height: 300px; /* Adjust the height as needed */
+      background-color: white; /* To ensure the map container is visible */
+      border: 2px solid #fff; /* White border to stand out against the black background */
+      border-radius: 10px; /* Optional: for rounded corners */
+    }
+  }

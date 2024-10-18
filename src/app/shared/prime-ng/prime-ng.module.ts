@@ -44,6 +44,8 @@ import { TreeSelectModule } from 'primeng/treeselect';
 import { TooltipModule } from 'primeng/tooltip';
 import {MultiSelectModule} from 'primeng/multiselect';
 import {ListboxModule} from 'primeng/listbox';
+import {GMapModule} from 'primeng/gmap';
+
 
 @NgModule({
   declarations:[
@@ -93,8 +95,8 @@ import {ListboxModule} from 'primeng/listbox';
     TreeSelectModule,
     TooltipModule,
     MultiSelectModule,
-    ListboxModule
-
+    ListboxModule,
+    GMapModule
   ]
 })
 export class PrimeNgModule { }

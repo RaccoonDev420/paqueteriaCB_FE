@@ -3,14 +3,15 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { MenuComponent } from './shared/components/menu/menu.component';
 import { PrimeNgModule } from './shared/prime-ng/prime-ng.module';
-import { HomeComponent } from './components/home/home.component';
 import { ApiModule, Configuration, ConfigurationParameters } from './shared/openapi';
 import { environment } from './enviroments/enviroment';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { JwtService } from './shared/service/JwtService';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+
 
 
 export function apiConfigFactory(): Configuration {
@@ -26,13 +27,13 @@ export function apiConfigFactory(): Configuration {
 @NgModule({
   declarations: [
     AppComponent,
-    MenuComponent,
-    HomeComponent
   ],
   imports: [
     AppRoutingModule,
     BrowserModule,
     PrimeNgModule,
+    FormsModule,
+    ReactiveFormsModule,
     BrowserAnimationsModule,
     HttpClientModule,
     ApiModule.forRoot(apiConfigFactory)

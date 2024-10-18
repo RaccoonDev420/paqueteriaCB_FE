@@ -17,11 +17,11 @@ export class AppComponent implements OnInit{
   }
 
   ngOnInit(): void {
-    //this.jwtService.setToken("Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzdHJpbmciLCJyb2xlcyI6W10sImV4cCI6MTcyMDMwMzIyNywiaWF0IjoxNzIwMjE2ODI3LCJqdGkiOiIyIn0.mccwaMf2ATFO2py0IiWNM7zbsRKD-ELqVO1EaCHThpU" )
-    this.config.credentials.JWT = this.jwtService.getToken();
+    // //this.jwtService.setToken("Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzdHJpbmciLCJyb2xlcyI6W10sImV4cCI6MTcyMDMwMzIyNywiaWF0IjoxNzIwMjE2ODI3LCJqdGkiOiIyIn0.mccwaMf2ATFO2py0IiWNM7zbsRKD-ELqVO1EaCHThpU" )
+    // this.config.credentials.JWT = this.jwtService.getToken();
 
-    this.mailPackageService.findAll().subscribe(result =>{
-      console.log(result['datos'])
-    })
+    // this.mailPackageService.findAll().subscribe(result =>{
+    //   console.log(result.data)
+    // })
   }
 }

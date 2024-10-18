@@ -10,8 +10,9 @@
     padding-bottom: 4px;
 }
 
-:host ::ng-deep .p-menuitem-link-active {
+:host ::ng-deep .p-menuitem-link:focus {
 
+    color: white !important;
     .p-menuitem-text {
         color: white !important;
     }
@@ -19,4 +20,25 @@
     .p-menuitem-icon {
         color: white !important;
     }
+}
+
+:host ::ng-deep .menu-item{
+    color: white !important;
+}
+
+:host ::ng-deep .p-menubar-end{
+    display: none !important;
+}
+
+:host ::ng-deep .menu-item .p-menuitem-link .p-menuitem-text {
+    color: white !important;
+}
+
+:host ::ng-deep .menu-item .p-menuitem-link .p-menuitem-icon {
+    color: white !important;
+}
+
+.row{
+    padding-left: 0px !important;
+    padding-right: 0px !important;
 }

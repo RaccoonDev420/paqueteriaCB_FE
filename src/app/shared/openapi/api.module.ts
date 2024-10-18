@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 
 import { AuthAPIService } from './api/authAPI.service';
 import { BranchAPIService } from './api/branchAPI.service';
+import { BranchScheduleAPIService } from './api/branchScheduleAPI.service';
 import { EmployeeAPIService } from './api/employeeAPI.service';
 import { MailPackageAPIService } from './api/mailPackageAPI.service';
 import { MailPackageAssignationAPIService } from './api/mailPackageAssignationAPI.service';

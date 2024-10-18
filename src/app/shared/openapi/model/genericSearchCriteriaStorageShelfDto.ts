@@ -9,10 +9,12 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
+import { Pagination } from './pagination';
 import { SearchCondition } from './searchCondition';
 
 
 export interface GenericSearchCriteriaStorageShelfDto { 
     conditions?: Array<SearchCondition>;
+    pagination?: Pagination;
 }
 

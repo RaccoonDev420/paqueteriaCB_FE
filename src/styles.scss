@@ -1,10 +1,28 @@
 /* You can add global styles to this file, and also import other style files */
 @import "material-symbols";
 @import "scss/paquteriaCB.css";
+
+@font-face {
+    font-family: "FuturaLTW01Light";
+    src: url("https://db.onlinewebfonts.com/t/7fdb09ff5a96f39768f311d5471d68a9.eot");
+    src: url("https://db.onlinewebfonts.com/t/7fdb09ff5a96f39768f311d5471d68a9.eot?#iefix")format("embedded-opentype"),
+    url("https://db.onlinewebfonts.com/t/7fdb09ff5a96f39768f311d5471d68a9.woff2")format("woff2"),
+    url("https://db.onlinewebfonts.com/t/7fdb09ff5a96f39768f311d5471d68a9.woff")format("woff"),
+    url("https://db.onlinewebfonts.com/t/7fdb09ff5a96f39768f311d5471d68a9.ttf")format("truetype"),
+    url("https://db.onlinewebfonts.com/t/7fdb09ff5a96f39768f311d5471d68a9.svg#FuturaLig")format("svg");
+}
 .row{
     margin-right: 0px !important;
     margin-left: 0px !important;
 }
 p{
     margin-bottom: 0px !important;
+    background-color: black;
+    color: white;
+}
+html, body, h4, li, input{
+    background-color: black !important;
+    color: white !important;
+    font-family: 'FuturaLTW01Light', sans-serif;
+    text-decoration: none !important;
 }

@@ -1,0 +1,10 @@
+<div class="row align-items-center col-lg-6 col-md-12 mx-auto ps-2 pe-2">
+    <form [formGroup]="loginForm" class="col-12">
+        <label class="subtitle-label col-12 mb-2" for="email">Correo electronico</label>
+        <input class="label-container col-12 mb-2" pInputText type="text" id="email" formControlName="email" autocomplete="off"
+          placeholder="example@test.com">
+          <label class="subtitle-label col-12 mb-2" for="password">Contraseña</label>
+        <input class="label-container col-12 mt-2" pInputText type="password" id="password" formControlName="password" autocomplete="off"
+          placeholder="password">
+    </form>
+</div>
